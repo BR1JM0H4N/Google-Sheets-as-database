@@ -1,0 +1,260 @@
+@import url('https://fonts.googleapis.com/css2?family=Merienda:wght@300..900&display=swap');
+
+* {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+}
+
+a {
+color: #ff9527;
+}
+
+body {
+font-family: "Merienda", cursive;
+background: #1e1e1e;
+color: #e0e0e0;
+line-height: 1.6;
+display: flex;
+flex-direction: column;
+min-height: 100vh;
+}
+
+header {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+background: #333;
+box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+padding: 20px;
+z-index: 1000;
+text-align: center;
+transition: top 0.3s;
+}
+
+header h1 {
+font-size: 1.5rem;
+color: #e0e0e0;
+}
+
+main {
+padding: 100px 20px 20px;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.card-container {
+display: flex;
+flex-direction: column;
+/* Stack cards vertically */
+gap: 20px;
+width: 100%;
+max-width: 600px;
+/* Restrict width to mimic mobile layout */
+margin: 0 auto;
+/* Center the container */
+}
+
+.card {
+background: #292929;
+border-radius: 12px;
+box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+padding: 30px;
+/* Slightly larger padding for magnification */
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+overflow: hidden;
+width: 100%;
+/* Full width of the container */
+}
+
+.card:hover {
+transform: translateY(-5px);
+box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
+}
+
+.card h2 {
+margin-top: 0;
+font-size: 1.8rem;
+/* Magnified font size for better visibility */
+color: #ffc107;
+}
+
+.card p {
+margin: 10px 0;
+color: #ccc;
+font-size: 1rem;
+}
+
+.card img {
+max-width: 100%;
+height: auto;
+border-radius: 10px;
+margin-top: 10px;
+}
+
+footer {
+text-align: center;
+padding: 20px;
+background: #333;
+box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
+color: #e0e0e0;
+margin-top: auto;
+}
+
+.button {
+background: #007bff;
+color: #fff;
+padding: 10px 20px;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+transition: background 0.3s;
+}
+
+.button:hover {
+background: #0056b3;
+}
+
+table {
+width: 100%;
+max-width: 600px;
+/* Match container width for consistency */
+margin: 20px auto;
+border-collapse: collapse;
+background: #292929;
+color: #e0e0e0;
+border-radius: 12px;
+overflow: hidden;
+font-size: 1rem;
+}
+
+th, td {
+padding: 15px;
+text-align: left;
+}
+
+th {
+background: #333;
+color: #ffc107;
+}
+
+tbody tr:nth-child(even) {
+background: #333;
+}
+
+tbody tr:hover {
+background: #444;
+color: #ffc107;
+}
+
+table, th, td {
+border: 1px solid #555;
+}
+
+table th:first-child, table td:first-child {
+border-top-left-radius: 12px;
+}
+
+table th:last-child, table td:last-child {
+border-top-right-radius: 12px;
+}
+
+table tr:last-child td:first-child {
+border-bottom-left-radius: 12px;
+}
+
+table tr:last-child td:last-child {
+border-bottom-right-radius: 12px;
+}
+
+ol {
+padding-left: 25px;
+font-size: 1rem;
+padding-bottom: 10px;
+}
+
+.card h3, h4, h5, h6 {
+color: #d5ffb4;
+}
+
+input, textarea, select {
+width: 100%;
+padding: 10px;
+margin: 5px 0 15px;
+border: 1px solid #555;
+border-radius: 5px;
+background: #333;
+color: #e0e0e0;
+}
+
+input:focus, textarea:focus, select:focus {
+border-color: #007bff;
+outline: none;
+}
+
+/* Animations */
+@keyframes fadeIn {
+from {
+opacity: 0;
+}
+to {
+opacity: 1;
+}
+}
+
+.card {
+animation: fadeIn 1s ease-in-out;
+}
+
+/* Ethereal Spinner Styles */
+#loading-spinner {
+display: flex;
+justify-content: center;
+align-items: center;
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+z-index: 1000;
+background: rgba(0, 0, 0, 0.7);
+backdrop-filter: blur(10px);
+}
+
+#loading-spinner .spinner {
+position: relative;
+width: 80px;
+height: 80px;
+border-radius: 50%;
+border: 8px solid rgba(255, 255, 255, 0.3);
+border-top-color: rgba(255, 255, 255, 0.8);
+animation: spin 1.5s ease infinite;
+box-shadow: 0 0 20px rgba(255, 255, 255, 0.5), 0 0 50px rgba(255, 255, 255, 0.3);
+}
+
+@keyframes spin {
+0% {
+transform: rotate(0deg);
+}
+100% {
+transform: rotate(360deg);
+}
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+header h1 {
+font-size: 1.2rem;
+}
+.card {
+padding: 15px;
+}
+.card h2 {
+font-size: 1.2rem;
+}
+footer {
+font-size: 0.8rem;
+}
+}

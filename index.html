@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Personal Blog</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+  <div id="loading-spinner">
+    <div class="spinner"></div>
+  </div>
+  <div class="container">
+    <header>
+      <h2 id="tittle">My Personal Blog</h2>
+    </header>
+    <main>
+      <div id="blog-container" class="card-container"></div>
+    </main>
+    <footer>
+      <p>
+        &copy; 2024 My Personal Blog
+        <br /> Powered by Google Workspace
+    </p>
+  </footer>
+  <script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", () => {
+    const apiPnt = prompt("Google script endpoint api here (i.e :: https://script.google.com/macros/s/****************************/exec");
+    const spinner = document.getElementById("loading-spinner");
+
+    fetch(apiPnt)
+    .then((response) => response.json())
+    .then((data) => {
+    if (data.data) {
+    const sortedEvents = data.data
+    .filter((event) => event.event_id !== "Event_no")
+    .sort((a, b) => b.event_id - a.event_id);
+
+    displayEvents(sortedEvents);
+    }
+    })
+    .catch((error) => console.error("Error fetching data:", error))
+    .finally(() => {
+    // Hide the spinner after loading
+    spinner.style.display = "none";
+    });
+    });
+
+    function displayEvents(events) {
+    const container = document.getElementById("blog-container");
+    container.innerHTML = "";
+
+    events.forEach((event) => {
+    const card = document.createElement("div");
+    card.classList.add("card");
+
+    const formattedDate = new Date(event.date).toLocaleDateString("en-GB");
+
+    // Use `marked()` to convert Markdown to HTML
+    const contentHTML = marked.parse(event.content);
+
+    card.innerHTML = `
+    <h2>${event.topic}</h2>
+    <p><strong>Date:</strong> ${formattedDate}</p>
+    <div>${contentHTML}</div>
+    `;
+
+    container.appendChild(card);
+    });
+    }
+
+    let lastScrollTop = 0;
+    window.addEventListener("scroll", function () {
+    const header = document.querySelector("header");
+    const header_text = document.getElementById("tittle");
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+    if (scrollTop > lastScrollTop) {
+    // Downscroll: move header up and text slightly down
+    header.style.top = "-80px"; // Header moves up
+    header_text.style.top = "40px"; // Text moves down independently
+    } else {
+    // Upscroll: reset positions
+    header.style.top = "0";
+    header_text.style.top = "0";
+    }
+
+    lastScrollTop = scrollTop;
+    });
+  </script>
+</div>
+</body>
+</html>
